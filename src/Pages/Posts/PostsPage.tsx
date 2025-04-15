@@ -1,0 +1,28 @@
+import {PostsTableDataTypes, Table} from "../../components/ui/Table/Table.tsx";
+import {useEffect, useState} from "react";
+import WPAPI from "wpapi";
+
+export const PostsPage = () => {
+    const [posts, setPosts] = useState([]);
+    const wp = new WPAPI({ endpoint: 'http://localhost/react-wp/wp-json' });
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const fetchedPosts = await wp.posts().get();
+                setPosts(fetchedPosts);
+            } catch (e) {
+                console.log(e)
+                return [];
+            }
+        }
+        fetchPosts();
+    }, []);
+    const data: PostsTableDataTypes = {
+        columns: [
+            { title: 'Название', name: 'name', cell: function cell(row){ return row.name } },
+            { title: "Текст", name: "text", cell: function cell(row){ return row.text }},
+        ],
+        rows: posts.map(({title, content}) => ({ name: title["rendered"], text: content["rendered"]}))
+    }
+    return <Table data={data} title={"Посты"}/>
+}
