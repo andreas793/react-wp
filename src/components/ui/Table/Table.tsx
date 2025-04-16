@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {TableProps} from "./types.ts";
+import {RowsTypes, TableProps} from "./types.ts";
 import {ActionPanel, TableCell, TableRow, TableWrapper} from "./styled.ts";
 
 
@@ -17,9 +17,7 @@ export const Table: FC<TableProps> = ({actions, data, title, removeRow}) => {
                 <tbody>
                 {rows.map((row, index) => (
                     <TableRow key={index}>
-                        {columns.map(({cell}, index) => (
-                            <TableCell key={index}>{cell(row)}</TableCell>
-                        ))}
+                        {columns.map(({name}, index) => <TableCell key={index}>{row[name as keyof RowsTypes]}</TableCell>)}
                         { removeRow &&
                             <TableCell>
                                 <button onClick={() => removeRow(index)}>Удалить</button>

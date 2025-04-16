@@ -20,8 +20,8 @@ export const PostsPage = () => {
     }, []);
     const data: PostsTableDataTypes = {
         columns: [
-            { title: 'Название', name: 'name', cell: function cell(row){ return row.name } },
-            { title: "Текст", name: "text", cell: function cell(row){ return row.text }},
+            { title: 'Название', name: 'name'},
+            { title: "Текст", name: "text"},
         ],
         rows: posts.map(({title, content}) => ({ name: title["rendered"], text: content["rendered"]}))
     }

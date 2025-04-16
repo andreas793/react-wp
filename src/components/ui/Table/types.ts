@@ -10,7 +10,6 @@ export interface TableProps {
 export interface ColumnsTypes {
     title: string;
     name: string;
-    cell: (row: RowsTypes) => ReactNode;
 }
 
 export interface RowsTypes {
