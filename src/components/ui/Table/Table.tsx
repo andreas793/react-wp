@@ -15,12 +15,12 @@ export const Table: FC<TableProps> = ({actions, data, title, removeRow}) => {
                     </TableRow>
                 </thead>
                 <tbody>
-                {rows.map((row, index) => (
-                    <TableRow key={index}>
+                {rows.map((row) => (
+                    <TableRow key={row.id}>
                         {columns.map(({name}, index) => <TableCell key={index}>{row[name as keyof RowsTypes]}</TableCell>)}
                         { removeRow &&
                             <TableCell>
-                                <button onClick={() => removeRow(index)}>Удалить</button>
+                                <button onClick={() => removeRow(row.id)}>Удалить</button>
                             </TableCell>
                         }
                     </TableRow>

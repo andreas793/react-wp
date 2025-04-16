@@ -45,7 +45,8 @@ export const EmployeesPage = () => {
                 title: "Компетенции", name: 'competences',
             },
         ],
-        rows: employees.map(({title, meta}) => ({
+        rows: employees.map(({id, title, meta}) => ({
+            id: id,
             name: title["rendered"],
             age: meta["age"],
             competences: meta["competences"]

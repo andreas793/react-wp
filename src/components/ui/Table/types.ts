@@ -13,6 +13,7 @@ export interface ColumnsTypes {
 }
 
 export interface RowsTypes {
+    id: number;
     name: string;
     age?: number;
     competences?: string;

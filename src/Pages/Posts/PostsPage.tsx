@@ -23,7 +23,7 @@ export const PostsPage = () => {
             { title: 'Название', name: 'name'},
             { title: "Текст", name: "text"},
         ],
-        rows: posts.map(({title, content}) => ({ name: title["rendered"], text: content["rendered"]}))
+        rows: posts.map(({id, title, content}) => ({id: id, name: title["rendered"], text: content["rendered"]}))
     }
     return <Table data={data} title={"Посты"}/>
 }

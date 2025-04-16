@@ -1,6 +1,6 @@
 import {Table} from "../../components/ui/Table/Table.tsx";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks.ts";
-import { fetchTasks} from "../../redux/taskReducer.ts";
+import {deleteTask, fetchTasks} from "../../redux/taskReducer.ts";
 import {useEffect} from "react";
 
 export const TasksPage = () => {
@@ -11,6 +11,9 @@ export const TasksPage = () => {
         dispatch(fetchTasks());
     }, [dispatch]);
 
+    const removeRow  = (taskID: number) => {
+        dispatch(deleteTask(taskID));
+    }
 
-    return <Table data={tableData} title={"Задачи"}/>
+    return <Table data={tableData} title={"Задачи"} removeRow={removeRow}/>
 };
