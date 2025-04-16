@@ -1,6 +1,7 @@
-import {PostsTableDataTypes, Table} from "../../components/ui/Table/Table.tsx";
 import {useEffect, useState} from "react";
 import WPAPI from "wpapi";
+import {PostsTableDataTypes} from "../../components/ui/Table/types.ts";
+import {Table} from "../../components/ui/Table/Table.tsx";
 
 export const PostsPage = () => {
     const [posts, setPosts] = useState([]);

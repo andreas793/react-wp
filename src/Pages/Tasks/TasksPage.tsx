@@ -1,30 +1,15 @@
-import {Table, TaskTableDataTypes} from "../../components/ui/Table/Table.tsx";
-import {useEffect, useState} from "react";
-import WPAPI from "wpapi";
+import {Table} from "../../components/ui/Table/Table.tsx";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks.ts";
+import {removeTask} from "../../redux/taskReducer.ts";
+import {AddTaskForm} from "./Forms/AddTaskForm.tsx";
 
 export const TasksPage = () => {
-    const [tasks, setTasks] = useState([]);
-    const wp = new WPAPI({ endpoint: 'http://localhost/react-wp/wp-json' });
-    wp.tasks = wp.registerRoute('wp/v2', 'tasks');
-    useEffect(() => {
-        const fetchTasks = async () => {
-            try {
-                const fetchedTasks = await wp.tasks().get();
-                setTasks(fetchedTasks);
-            }
-            catch (e) {
-                console.log(e)
-                return [];
-            }
-        }
-        fetchTasks();
-    }, [])
-    const data: TaskTableDataTypes = {
-        columns: [
-            { title: 'Название', name: 'name', cell: function cell(row){ return row.name } },
-            { title: "Компетенции", name: "competences", cell: function cell(row){ return row.competences }},
-        ],
-        rows: tasks.map(({title, meta}) => ({name: title["rendered"], competences: meta['competences']}))
+    const dispatch = useAppDispatch()
+
+    const tableData = useAppSelector(({task}) => task);
+
+    const removeRow  = (index: number) => {
+        dispatch(removeTask(index));
     }
-    return <Table data={data} title={"Задачи"}/>
+    return <Table data={tableData} title={"Задачи"} actions={<AddTaskForm />} removeRow={removeRow}/>
 };

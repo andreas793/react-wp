@@ -1,6 +1,7 @@
-import {EmployeesTableDataTypes, Table} from "../../components/ui/Table/Table.tsx";
 import {useEffect, useState} from "react";
 import WPAPI from "wpapi";
+import {EmployeesTableDataTypes} from "../../components/ui/Table/types.ts";
+import {Table} from "../../components/ui/Table/Table.tsx";
 
 // const dataTable: EmployeesTableDataTypes = {
 //     columns: [
