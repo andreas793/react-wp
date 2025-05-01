@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 import {Icon} from "./ui/Icons/Icon.tsx";
 
 const menuList = [
+    { title: 'Вход', url: './Login' },
     {title: 'Посты', url: '/', icon: <LogoIcon />},
     {title: 'Задачи', url: '/tasks', icon: <TasksIcon />},
     {title: 'Сотрудники', url: '/employees', icon: <Employees />},
