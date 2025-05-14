@@ -1,12 +1,12 @@
 import WPAPI from "wpapi";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {PostsTableDataTypes} from "../components/ui/Table/types.ts";
+import {PostsTableDataTypes, RowsTypes} from "../components/ui/Table/types.ts";
 
 const wp = new WPAPI({ endpoint: 'http://localhost/react-wp/wp-json' });
 
 const fetchPostsList = async () => {
     const response = await wp.posts().get();
-    const posts = response.map(({id, title, content}: {
+    const posts: RowsTypes[] = response.map(({id, title, content}: {
         id: string,
         title: {rendered: string},
         content: {rendered: string}
