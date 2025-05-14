@@ -1,29 +1,15 @@
-import {useEffect, useState} from "react";
-import WPAPI from "wpapi";
-import {PostsTableDataTypes} from "../../components/ui/Table/types.ts";
 import {Table} from "../../components/ui/Table/Table.tsx";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks.ts";
+import {useEffect} from "react";
+import {fetchPosts} from "../../redux/postsReducer.ts";
 
 export const PostsPage = () => {
-    const [posts, setPosts] = useState([]);
-    const wp = new WPAPI({ endpoint: 'http://localhost/react-wp/wp-json' });
+    const dataTable = useAppSelector(({posts}) => posts);
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const fetchedPosts = await wp.posts().get();
-                setPosts(fetchedPosts);
-            } catch (e) {
-                console.log(e)
-                return [];
-            }
-        }
-        fetchPosts();
-    }, []);
-    const data: PostsTableDataTypes = {
-        columns: [
-            { title: 'Название', name: 'name'},
-            { title: "Текст", name: "text"},
-        ],
-        rows: posts.map(({id, title, content}) => ({id: id, name: title["rendered"], text: content["rendered"]}))
-    }
-    return <Table data={data} title={"Посты"}/>
+        dispatch(fetchPosts());
+    },[dispatch]);
+
+    return <Table data={dataTable} title={"Посты"}/>
 }
