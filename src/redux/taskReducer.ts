@@ -44,7 +44,7 @@ const initialState: TaskTableDataTypes = {
 
 const tasksSlice = createSlice({
     name: 'task',
-    initialState: initialState,
+    initialState,
     reducers: {
         addTask: (state, action) => {
             state.rows = [...state.rows, action.payload];
